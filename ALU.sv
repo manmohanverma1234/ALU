@@ -1,0 +1,48 @@
+module ALU(input logic [2:0]slector,input logic [7:0]a,b,output logic [15:0]result,output logic c_flag,z_flag
+
+
+    );
+    always_comb
+    begin 
+    case(slector)
+    3'b000:begin
+       result=a+b; 
+       c_flag=result[8];
+       z_flag=(result==16'b0);
+       end
+    3'b001:begin 
+    result=a-b;
+    c_flag=result[8];
+    z_flag=(result==16'b0);
+     end
+    3'b010:begin 
+    result=a*b;
+    z_flag=(result==16'b0);
+    end 
+    3'b011:begin
+     result=a&b;
+     z_flag=(result==16'b0);
+     end 
+    3'b100:begin 
+    result=a|b;
+    z_flag=(result==16'b0);
+    end
+    3'b101:begin 
+    result=~(a&b);
+    z_flag=(result==16'b0);
+    end 
+    3'b110:begin
+    result=~(a|b);
+    z_flag=(result==16'b0);
+    end
+    3'b111:begin 
+    result=a^b;
+    z_flag=(result==16'b0);
+    end
+    default:begin 
+    result=a+b;
+    z_flag=(result==16'b0);
+    end
+    endcase
+    end
+endmodule
